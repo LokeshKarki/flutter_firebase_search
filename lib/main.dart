@@ -6,6 +6,11 @@ import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 import 'dart:io';
 import 'package:flutter_appavailability/flutter_appavailability.dart';
+import 'dart:async';
+
+
+import 'package:uni_links/uni_links.dart';
+import 'package:flutter/services.dart' show PlatformException;
 
 
 void main() => runApp(new MyApp());
@@ -104,8 +109,33 @@ class _MyHomePageState extends State<MyHomePage> {
         ]));
   }
 
+Future<Null> initUniLinks() async {
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      String initialLink = await getInitialLink();
+      
 
 
+      // Parse the link and warn the user, if it is not correct,
+      // but keep in mind it could be `null`.
+    } on PlatformException {
+      print("change the platform to Android");
+    }
+  }
+
+// linksearch(data)
+// {
+// String pm = data['PrimeMusic'] as String;
+// String ga = data['Ganna'] as String;
+// String wk = data['Wynk'] as String;
+// String js = data['JioSavaan'] as String;
+
+// String key;
+// if (key == pm || key == ga|| key == wk||key == js )
+
+// initiateSearch(Element);
+
+// }
 
 
 _openGanna (data) async
