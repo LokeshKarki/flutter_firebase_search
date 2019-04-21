@@ -2,7 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:search/searchs.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:android_intent/android_intent.dart';
+import 'package:device_apps/device_apps.dart';
+import 'dart:io';
+import 'package:flutter_appavailability/flutter_appavailability.dart';
 
 
 void main() => runApp(new MyApp());
@@ -62,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
+          centerTitle: true,
           title: Text('BeatsShare'),
         ),
         body: ListView(children: <Widget>[
@@ -81,12 +85,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   ),
                   contentPadding: EdgeInsets.only(left: 25.0),
-                  hintText: 'Search by name',
+                  hintText: 'Enter Song here',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4.0))),
             ),
           ),
-          SizedBox(height: 10.0),
+          SizedBox(height: 20.0,),
           GridView.count(
               padding: EdgeInsets.only(left: 10.0, right: 10.0),
               crossAxisCount: 2,
@@ -99,84 +103,134 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList())
         ]));
   }
+
+
+
+
+
+_openGanna (data) async
+{
+   String dt = data['Ganna'] as String;
+   bool isInstalled = await DeviceApps.isAppInstalled('com.ganna');
+   if (isInstalled != false)
+    {
+    AndroidIntent intent = AndroidIntent(
+      action: 'action_view',
+      data: dt
+     // arguments: {'authAccount': currentUserEmail"},
+  );await intent.launch();
+    }
+else
+{
+  String url = dt;
+  if (await canLaunch(url)) 
+    await launch(url);
+   else 
+    throw 'Could not launch $url';
+}
 }
 
-
-_openURL() async
+_openWynk (data) async
+{String dt = data['Wynk'] as String;
+  bool isInstalled = await DeviceApps.isAppInstalled('com.bsportal.music');
+if (isInstalled != false)
   { 
+    AndroidIntent intent = AndroidIntent(
+      action: 'action_view',
+      data: dt
+  ); await intent.launch();
+  } 
+else
+  {
+  String url = dt;
+  if (await canLaunch(url)) 
+    await launch(url);
+   else 
+    throw 'Could not launch $url';
+}
+}
 
+_openJioSavaan (data) async
+{String dt = data['JioSavaan'] as String;
+  bool isInstalled = await DeviceApps.isAppInstalled('com.jio.media.jiobeats');
+if (isInstalled != false)
+ {
+    AndroidIntent intent = AndroidIntent(
+      action: 'action_view',
+      data: dt
+  ); await intent.launch();
+ }
+else
+  {
+  String url = dt;
+  if (await canLaunch(url)) 
+    await launch(url);
+   else 
+    throw 'Could not launch $url';
+}
+}
 
-   var data;
-    String _url = Text(data['Ganna']) as String;
-    String url = _url;
-  if (await canLaunch(url) ){
-    launch(url);
+_openPrimeMusic (data) async
+{String dt = data['PrimeMusic'] as String;
+  bool isInstalled = await DeviceApps.isAppInstalled('com.amazon.mp3');
+if (isInstalled != false)
+  {
+    AndroidIntent intent = AndroidIntent(
+      action: 'action_view',
+      data: dt
+  );await intent.launch();
   }
-  else{
-    Text("Url cannot be reached");
-  }
+else
+  {
+  String url = dt;
+  if (await canLaunch(url)) 
+    await launch(url);
+   else 
+    throw 'Could not launch $url';
+}
+}
 
-  }
 
     
 
 
 
 Widget buildResultCard(data) {
-   
-      return Container(
-        padding: EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text(data['Ganna']),
-              RaisedButton(
-                child: Text('Ganna'),
-                onPressed: _openURL()
-                 )
-            ],
-          ),
-        ),
-      );
-     
+  
+   List items = [Text(data['Ganna']),
+                  IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openGanna(data)
+                  ),
+
+                 Text(data['Wynk']),
+                  IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openWynk(data)
+                  ), 
+
+                  Text(data['JioSavaan']),
+                  IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openJioSavaan(data)
+                  ),
+
+                   Text(data['PrimeMusic']),
+                   IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openPrimeMusic(data)
+                  )];
+
+      return  ListView.builder(
+           padding: EdgeInsets.only(top: 20),
+            itemCount: items.length,
+            itemBuilder: (BuildContext context, int index) {
+            return items[index];
+           },
+          );
+        
+        
+      
+
 }
      
      
-    // alignment: MainAxisAlignment.spaceEvenly,
-     //children: <Widget>[
- //      
-   //    Text(data['Ganna']),
-       
-       //Text(data['Wynk']),
-       //Text(data['JioSavaan']),
-       //Text(data['PrimeMusic'])
-     //],
+ 
 
-  // ); 
-   
-
-
-//}
-// Card(
-//     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-//     elevation: 2.0,
-    
-//     child: Container(
-      
-      
-//       child: Center(
-        
-//         child: 
-//         Text(data['Ganna'],
-        
-        
-//         textAlign: TextAlign.center,
-//         style: TextStyle(
-//           color: Colors.black,
-//           fontSize: 20.0,
-//         ),
-//         )
-//       )
-//     )
-//   );
-// }
+}

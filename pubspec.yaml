@@ -17,6 +17,9 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  device_apps:
+  flutter_appavailability:
+  android_intent:
   uni_links:
   url_launcher:
   firebase_core:
