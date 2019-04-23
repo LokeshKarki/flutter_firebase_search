@@ -140,7 +140,7 @@ Future<Null> initUniLinks() async {
 
 _openGanna (data) async
 {
-   String dt = data['Ganna'] as String;
+   String dt = data['gaanaUrl'] as String;
    bool isInstalled = await DeviceApps.isAppInstalled('com.ganna');
    if (isInstalled != false)
     {
