@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:search/searchs.dart';
+import 'package:search/searchLinksIntents.dart';
+import 'package:search/contribute.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
@@ -21,9 +23,14 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.lightGreen,
       ),
       home: new MyHomePage(),
+      routes: <String, WidgetBuilder>{
+        "/linksearch":(BuildContext context)=> Intent("Link Search"),
+        "/contributions":(BuildContext context)=> contri("Contributions"),
+      }
+
     );
   }
 }
@@ -57,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       tempSearchStore = [];
       queryResultSet.forEach((element) {
-        if (element['name'].startsWith(capitalizedValue)) {
+        if (element['songName'].startsWith(capitalizedValue)) {
           setState(() {
             tempSearchStore.add(element);
           });
@@ -72,7 +79,54 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: new AppBar(
           centerTitle: true,
           title: Text('BeatsShare'),
+        ), drawer:  Drawer(
+        child: ListView(
+          children: <Widget>[
+             UserAccountsDrawerHeader(
+              accountName:  Text("BeatsShare"),
+              accountEmail:  Text("beatsshare07@gmail.com"),
+              currentAccountPicture:  CircleAvatar(
+                //backgroundColor: Colors.greenAccent,
+                child: Text("BS"),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  child: Text("LSK"),)
+              ],
+              
+            ),
+             ListTile(
+              title: Text("Link Search"),
+              trailing:  Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed("/linksearch");
+              
+              },
+              ),
+             ListTile(
+              title: Text("Contributions"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed("/contributions");
+             
+            
+                }
+            ),
+             Divider(color: Colors.black45,),
+             ListTile(
+              title:  Text("CLose"),
+              trailing:  Icon(Icons.close),
+              onTap: ()=> Navigator.of(context).pop(),
+            )
+            
+            
+            
+          ]
         ),
+      ),
+        
         body: ListView(children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -180,9 +234,9 @@ else
 }
 }
 
-_openJioSavaan (data) async
-{String dt = data['JioSavaan'] as String;
-  bool isInstalled = await DeviceApps.isAppInstalled('com.jio.media.jiobeats');
+_openSpotify (data) async
+{String dt = data['spotifyUrl'] as String;
+  bool isInstalled = await DeviceApps.isAppInstalled('com.spotify.music');
 if (isInstalled != false)
  {
     AndroidIntent intent = AndroidIntent(
@@ -200,9 +254,9 @@ else
 }
 }
 
-_openPrimeMusic (data) async
-{String dt = data['PrimeMusic'] as String;
-  bool isInstalled = await DeviceApps.isAppInstalled('com.amazon.mp3');
+_openAppleMusic (data) async
+{String dt = data['itunesUrl'] as String;
+  bool isInstalled = await DeviceApps.isAppInstalled('com.apple.android.music');
 if (isInstalled != false)
   {
     AndroidIntent intent = AndroidIntent(
@@ -227,25 +281,71 @@ else
 
 Widget buildResultCard(data) {
   
-   List items = [Text(data['Ganna']),
-                  IconButton(icon:Icon(Icons.audiotrack), 
+   List items = [  Text(data['songName'], 
+                  style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    height: 20.0
+                  ),
+                  ),
+                  Text(data['albumName'],
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600, 
+                    fontStyle:FontStyle.italic ,
+                    height: 17.0
+                  ),
+                  ),
+                  Text('Ganna Link',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,   
+                  ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(icon:Icon(Icons.audiotrack), 
                   onPressed: ()=> _openGanna(data)
                   ),
+                  )
+                  ,
 
-                 Text(data['Wynk']),
-                  IconButton(icon:Icon(Icons.audiotrack), 
-                  onPressed: ()=> _openWynk(data)
-                  ), 
-
-                  Text(data['JioSavaan']),
-                  IconButton(icon:Icon(Icons.audiotrack), 
-                  onPressed: ()=> _openJioSavaan(data)
+                 Text('Wynk Link',
+                 style: TextStyle(
+                    fontWeight: FontWeight.w500, 
+                     
+                  ),),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(icon:Icon(Icons.audiotrack), 
+                    onPressed: ()=> _openWynk(data)
                   ),
+                  )
+                  ,
 
-                   Text(data['PrimeMusic']),
-                   IconButton(icon:Icon(Icons.audiotrack), 
-                  onPressed: ()=> _openPrimeMusic(data)
-                  )];
+                  Text('Spotify Link',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,   
+                  ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openSpotify(data)
+                  ),
+                  )
+                  ,
+
+                   Text('Apple Music Link',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,   
+                  ),
+                  ),
+                   Align(
+                    alignment: Alignment.centerLeft,
+                    child: IconButton(icon:Icon(Icons.audiotrack), 
+                  onPressed: ()=> _openAppleMusic(data)
+                  ),
+                  ),
+                  ];
+
 
       return  ListView.builder(
            padding: EdgeInsets.only(top: 20),

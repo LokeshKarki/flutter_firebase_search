@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:search/main.dart';
+import 'package:search/main.dart';
 
 class Intent extends StatelessWidget {
   final String title;
@@ -17,7 +18,7 @@ class Intent extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: TextField(
                 onChanged: (val) {
-                  linksearch(val);
+                  // linksearch(val);
                 },
                 decoration: InputDecoration(
                     prefixIcon: IconButton(
