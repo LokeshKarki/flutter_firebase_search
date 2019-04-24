@@ -74,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -86,16 +87,19 @@ class _MyHomePageState extends State<MyHomePage> {
              UserAccountsDrawerHeader(
               accountName:  Text("BeatsShare"),
               accountEmail:  Text("beatsshare07@gmail.com"),
+
               currentAccountPicture:  CircleAvatar(
                 //backgroundColor: Colors.greenAccent,
                 child: Text("BS"),
               ),
+              
               otherAccountsPictures: <Widget>[
                 CircleAvatar(
                   child: Text("LK"),
                   ),
                 CircleAvatar(
                   child: Text("AP"),
+
                 ),
               ],
               
@@ -115,20 +119,20 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: (){
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed("/linksearch");
-              
               },
               ),
+
              ListTile(
               title: Text("Contributions"),
               trailing: Icon(Icons.arrow_forward),
               onTap: (){
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed("/contributions");
-             
-            
                 }
             ),
+
              Divider(color: Colors.black45,),
+
              ListTile(
               title:  Text("Close"),
               trailing:  Icon(Icons.close),
@@ -176,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList())
         ]));
   }
-
+}
 Future<Null> initUniLinks() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
@@ -189,8 +193,8 @@ Future<Null> initUniLinks() async {
     } on PlatformException {
       print("change the platform to Android");
     }
-  }
-
+  
+}
 // linksearch(data)
 // {
 // String pm = data['PrimeMusic'] as String;
@@ -229,7 +233,7 @@ else
 }
 
 _openWynk (data) async
-{String dt = data['Wynk'] as String;
+{String dt = data['wynkUrl'] as String;
   bool isInstalled = await DeviceApps.isAppInstalled('com.bsportal.music');
 if (isInstalled != false)
   { 
@@ -298,20 +302,20 @@ Widget buildResultCard(data) {
    List items = [  Text(data['songName'], 
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
-                    height: 20.0
+                 
                   ),
                   ),
                   Text(data['albumName'],
                   style: TextStyle(
                     fontWeight: FontWeight.w600, 
                     fontStyle:FontStyle.italic ,
-                    height: 17.0
+                    
                   ),
                   ),
-                  Text(""),
+                  Divider(color: Colors.lightGreen,),
                   Text('Ganna Link',
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,   
+                    fontWeight: FontWeight.w400,   
                   ),
                   ),
                   Align(
@@ -324,7 +328,7 @@ Widget buildResultCard(data) {
 
                  Text('Wynk Link',
                  style: TextStyle(
-                    fontWeight: FontWeight.w500, 
+                    fontWeight: FontWeight.w400, 
                      
                   ),),
                   Align(
@@ -337,7 +341,7 @@ Widget buildResultCard(data) {
 
                   Text('Spotify Link',
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,   
+                    fontWeight: FontWeight.w400,   
                   ),
                   ),
                   Align(
@@ -350,7 +354,7 @@ Widget buildResultCard(data) {
 
                    Text('Apple Music Link',
                   style: TextStyle(
-                    fontWeight: FontWeight.w500,   
+                    fontWeight: FontWeight.w400,   
                   ),
                   ),
                    Align(
@@ -359,6 +363,7 @@ Widget buildResultCard(data) {
                   onPressed: ()=> _openAppleMusic(data)
                   ),
                   ),
+                  
                   ];
 
 
@@ -378,4 +383,4 @@ Widget buildResultCard(data) {
      
  
 
-}
+
