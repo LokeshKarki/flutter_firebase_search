@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search/main.dart';
-import 'package:search/main.dart';
+
 
 class Intent extends StatelessWidget {
   final String title;

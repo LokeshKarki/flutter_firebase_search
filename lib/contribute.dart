@@ -5,9 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 
 
-class contri extends StatelessWidget {
+class Contri extends StatelessWidget {
   final String title;
-  contri(this.title);
+  Contri(this.title);
 
 
 Future mail()
@@ -70,16 +70,10 @@ return Container(
              onPressed: ()=> mail()
              )
 
-
       ],
     ),
   ) ,
   );
-
-
-
-
-
 
 }
   @override
@@ -93,5 +87,4 @@ return Container(
         
   }
 
-  _mail(Type element) {}
 }

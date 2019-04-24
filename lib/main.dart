@@ -6,8 +6,8 @@ import 'package:search/contribute.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
-import 'dart:io';
-import 'package:flutter_appavailability/flutter_appavailability.dart';
+// import 'dart:io';
+// import 'package:flutter_appavailability/flutter_appavailability.dart';
 import 'dart:async';
 
 
@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
       ),
       home: new MyHomePage(),
       routes: <String, WidgetBuilder>{
+        "/homepage":(BuildContext context)=> MyApp(),
         "/linksearch":(BuildContext context)=> Intent("Link Search"),
-        "/contributions":(BuildContext context)=> contri("Contributions"),
+        "/contributions":(BuildContext context)=> Contri("Contributions"),
       }
 
     );
@@ -91,10 +92,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               otherAccountsPictures: <Widget>[
                 CircleAvatar(
-                  child: Text("LSK"),)
+                  child: Text("LK"),
+                  ),
+                CircleAvatar(
+                  child: Text("AP"),
+                ),
               ],
               
             ),
+            ListTile(
+              title: Text("Home Page"),
+              trailing:  Icon(Icons.arrow_forward),
+              onTap: (){
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed("/homepage");
+              
+              },
+              ),
              ListTile(
               title: Text("Link Search"),
               trailing:  Icon(Icons.arrow_forward),
@@ -116,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
              Divider(color: Colors.black45,),
              ListTile(
-              title:  Text("CLose"),
+              title:  Text("Close"),
               trailing:  Icon(Icons.close),
               onTap: ()=> Navigator.of(context).pop(),
             )
@@ -294,6 +308,7 @@ Widget buildResultCard(data) {
                     height: 17.0
                   ),
                   ),
+                  Text(""),
                   Text('Ganna Link',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,   
