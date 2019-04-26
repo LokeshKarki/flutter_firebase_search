@@ -6,13 +6,9 @@ import 'package:search/contribute.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
-// import 'dart:io';
-// import 'package:flutter_appavailability/flutter_appavailability.dart';
-import 'dart:async';
 
 
-import 'package:uni_links/uni_links.dart';
-import 'package:flutter/services.dart' show PlatformException;
+
 
 
 void main() => runApp(new MyApp());
@@ -24,6 +20,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primarySwatch: Colors.lightGreen,
+        //brightness: Brightness.dark,
+        backgroundColor: Colors.black,
+        accentColor: Colors.green
+        
       ),
       home: new MyHomePage(),
       routes: <String, WidgetBuilder>{
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
               accountEmail:  Text("beatsshare07@gmail.com"),
 
               currentAccountPicture:  CircleAvatar(
-                //backgroundColor: Colors.greenAccent,
+                
                 child: Text("BS"),
               ),
               
@@ -158,7 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.arrow_back),
                     iconSize: 20.0,
                     onPressed: () {
-                      Navigator.of(context).pop();
+                     // Navigator.of(context).pop();
                     },
                   ),
                   contentPadding: EdgeInsets.only(left: 25.0),
@@ -181,20 +181,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ]));
   }
 }
-Future<Null> initUniLinks() async {
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      String initialLink = await getInitialLink();
+// Future<Null> initUniLinks() async {
+//     // Platform messages may fail, so we use a try/catch PlatformException.
+//     try {
+//       String initialLink = await getInitialLink();
       
 
 
-      // Parse the link and warn the user, if it is not correct,
-      // but keep in mind it could be `null`.
-    } on PlatformException {
-      print("change the platform to Android");
-    }
+//       // Parse the link and warn the user, if it is not correct,
+//       // but keep in mind it could be `null`.
+//     } on PlatformException {
+//       print("change the platform to Android");
+//     }
   
-}
+// }
 // linksearch(data)
 // {
 // String pm = data['PrimeMusic'] as String;
@@ -295,64 +295,71 @@ else
 
     
 
-
-
 Widget buildResultCard(data) {
-  
+    String singer = (data['singer1'] +', '+ data['singer2']+', '+ data['singer3']) as String;
    List items = [  Text(data['songName'], 
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
-                 
+                    fontSize: 20.0
                   ),
                   ),
                   Text(data['albumName'],
                   style: TextStyle(
                     fontWeight: FontWeight.w600, 
                     fontStyle:FontStyle.italic ,
+                    fontSize: 15.0
                     
                   ),
                   ),
+                  Text(singer,
+                  style: TextStyle(
+                    
+                  ),
+                  ),
+
                   Divider(color: Colors.lightGreen,),
+
                   Text('Ganna Link',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,   
                   ),
                   ),
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(icon:Icon(Icons.audiotrack), 
                   onPressed: ()=> _openGanna(data)
                   ),
-                  )
-                  ,
+                  ),
 
                  Text('Wynk Link',
                  style: TextStyle(
-                    fontWeight: FontWeight.w400, 
-                     
-                  ),),
+                    fontWeight: FontWeight.w400,  
+                  ),
+                  ),
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(icon:Icon(Icons.audiotrack), 
                     onPressed: ()=> _openWynk(data)
                   ),
-                  )
-                  ,
-
+                  ),
+                  
                   Text('Spotify Link',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,   
                   ),
                   ),
+
                   Align(
                     alignment: Alignment.centerLeft,
                     child: IconButton(icon:Icon(Icons.audiotrack), 
                   onPressed: ()=> _openSpotify(data)
                   ),
-                  )
-                  ,
+                  ),
+                  
 
-                   Text('Apple Music Link',
+                  Text('Apple Music Link',
                   style: TextStyle(
                     fontWeight: FontWeight.w400,   
                   ),
@@ -363,7 +370,6 @@ Widget buildResultCard(data) {
                   onPressed: ()=> _openAppleMusic(data)
                   ),
                   ),
-                  
                   ];
 
 
@@ -376,11 +382,5 @@ Widget buildResultCard(data) {
           );
         
         
-      
-
 }
      
-     
- 
-
-

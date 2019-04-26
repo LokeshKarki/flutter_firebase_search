@@ -1,6 +1,4 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
-import 'package:android_intent/android_intent.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 
@@ -10,26 +8,14 @@ class Contri extends StatelessWidget {
   Contri(this.title);
 
 
-Future mail()
+Future mail(String toMailId, String subject, String body)
 async {
-    String dt = 'https://mail.google.com/mail/u/0/#inbox?compose=new';
-   bool isInstalled = await DeviceApps.isAppInstalled('com.google.android.gm');
-   if (isInstalled != false)
-    { 
-    AndroidIntent intent = AndroidIntent(
-      action: 'action_view',
-      data: dt
-    
-  );await intent.launch();
+    var url = 'mailto:$toMailId?subject=$subject&body=$body';
+   if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
     }
-else
-{
-  String url = dt;
-  if (await canLaunch(url)) 
-    await launch(url);
-   else 
-    throw 'Could not launch $url';
-}
 
 }
 
@@ -67,7 +53,7 @@ return Container(
           fontWeight: FontWeight.w500)),
           RaisedButton(
              child: Text("Mail us feedback"),
-             onPressed: ()=> mail()
+             onPressed: ()=> mail('beatsshare07@gmail.com', 'App Feedback' , 'Hey, I have used your app, and I would like to give my feedback as follows -  ')
              )
 
       ],
