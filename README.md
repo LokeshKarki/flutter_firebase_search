@@ -16,3 +16,9 @@ HOW TO RUN
 BeatsShare  - 
 
 ![2zj4o6](https://user-images.githubusercontent.com/33099008/56824749-f5bfe600-6874-11e9-81cc-bf59d1e760da.gif)
+![Layout_BeatsShare](https://user-images.githubusercontent.com/33099008/56826397-c8c20200-6879-11e9-97c1-a0a65acef7b5.png)
+![Gaana_BeatsShare](https://user-images.githubusercontent.com/33099008/56826401-cd86b600-6879-11e9-813e-83f375bdb040.png)
+![Wynk_BeatsShare](https://user-images.githubusercontent.com/33099008/56826409-cf507980-6879-11e9-8506-79a8f28b1836.png)
+![Spotify_BeatsShare](https://user-images.githubusercontent.com/33099008/56826413-d24b6a00-6879-11e9-9114-3afaaa383323.png)
+![AppleMusic_BeatsShare](https://user-images.githubusercontent.com/33099008/56826419-d4152d80-6879-11e9-9c3a-03cfe4539848.png)
+
