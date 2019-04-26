@@ -8,6 +8,8 @@ HOW TO RUN
 - Connect your Android Device.
 - Type >flutter run in the Terminal
 - Run the Application in your mobile device
+- You can also the apk of this app by command >flutter build apk
+
 
 
 
