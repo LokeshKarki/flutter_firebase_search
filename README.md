@@ -1,4 +1,4 @@
-HOW TO RUN
+HOW TO RUN/ STEPS TO REPRODUCE
 
 - Clone the project.
 - Open VS code.
