@@ -8,3 +8,11 @@ HOW TO RUN
 - Connect your Android Device.
 - Type >flutter run in the Terminal
 - Run the Application in your mobile device
+
+
+
+
+
+BeatsShare  - 
+
+![2zj4o6](https://user-images.githubusercontent.com/33099008/56824749-f5bfe600-6874-11e9-81cc-bf59d1e760da.gif)
