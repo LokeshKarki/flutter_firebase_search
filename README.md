@@ -15,7 +15,7 @@ HOW TO RUN/ STEPS TO REPRODUCE
 
 
 
-BeatsShare Application  - 
+BeatsShare APPLICATION SAMPLE  - 
 
 ![2zj4o6](https://user-images.githubusercontent.com/33099008/56824749-f5bfe600-6874-11e9-81cc-bf59d1e760da.gif)
 ![Layout_BeatsShare](https://user-images.githubusercontent.com/33099008/56826397-c8c20200-6879-11e9-97c1-a0a65acef7b5.png)
